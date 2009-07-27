@@ -23,13 +23,12 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<jettyEnvXml>etc/jetty-env.xml</jettyEnvXml>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
-    <!-- 
+    
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -37,6 +36,12 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<version>2.5.6</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
-	 -->
+	
 </project>
