@@ -8,7 +8,7 @@
 
 	<!-- the usual welcome file list -->
 	<welcome-file-list>
-		<welcome-file>/index.html</welcome-file>
+		<welcome-file>/</welcome-file>
 	</welcome-file-list>
 
 	<context-param>
@@ -19,16 +19,32 @@
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
-        </listener-class>
+		</listener-class>
 	</listener>
 
 	<filter>
 		<display-name>Stripes Filter</display-name>
 		<filter-name>StripesFilter</filter-name>
-		<filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
+		<filter-class>net.sourceforge.stripes.controller.StripesFilter
+		</filter-class>
+		<!-- actions autodiscover -->
 		<init-param>
 			<param-name>ActionResolver.Packages</param-name>
-			<param-value>my.action.bean.pkg</param-value>
+			<param-value>org.dataport.bussr.action</param-value>
+		</init-param>
+
+		<!-- resource bundles for literals -->
+		<init-param>
+			<param-name>ResourceBundles.BaseNames</param-name>
+			<param-value>messages</param-value>
+		</init-param>
+
+        <!-- for injecting spring beans -->
+		<init-param>
+			<param-name>Interceptor.Classes</param-name>
+			<param-value>
+				net.sourceforge.stripes.integration.spring.SpringInterceptor
+    </param-value>
 		</init-param>
 	</filter>
 
@@ -46,13 +62,15 @@
 
 	<servlet>
 		<servlet-name>StripesDispatcher</servlet-name>
-		<servlet-class>net.sourceforge.stripes.controller.DispatcherServlet</servlet-class>
+		<servlet-class>net.sourceforge.stripes.controller.DispatcherServlet
+		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<!-- without extensions -->
 	<servlet-mapping>
 		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>*.action</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 </web-app>

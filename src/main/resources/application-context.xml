@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:jee="http://www.springframework.org/schema/jee"
-    xmlns:aop="http://www.springframework.org/schema/aop"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
                     http://www.springframework.org/schema/tx 
                     http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
                     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
                     http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
+
+    <!-- in the future split this file ?? -->
+    
+    <!-- TODO use configuration properties and maven filters for extracting configuration values to an external file -->
+    
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="url" value="jdbc:mysql://localhost/bussr" />
+		<property name="username" value="bussr" />
+		<property name="password" value="bussr" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="maxActive" value="20" />
+		<property name="minIdle" value="0" />
+	</bean>
+
+
+	<bean id="logEntryDao" class="org.dataport.bussr.data.impl.JdbcLogEntryDao">
+		<constructor-arg ref="dataSource" />
+	</bean>
 
 </beans>
