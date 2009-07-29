@@ -9,10 +9,8 @@
                     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
                     http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
 
-    <!-- in the future split this file ?? -->
-    
+    <!-- FIXME in the future split this file ?? -->
     <!-- TODO use configuration properties and maven filters for extracting configuration values to an external file -->
-    
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="url" value="jdbc:mysql://localhost/bussr" />
@@ -26,6 +24,12 @@
 
 	<bean id="logEntryDao" class="org.dataport.bussr.data.impl.JdbcLogEntryDao">
 		<constructor-arg ref="dataSource" />
+	</bean>
+	
+	<bean id="onceOchoSetentaService" class="org.dataport.bussr.service.search.provider.OncheOchoSetentaSearchService">
+	   <constructor-arg value="http://11870.com/api/v1/search"/>
+	   <constructor-arg value="3a799df328439d30e57b85495e67ae34"/>
+	   <constructor-arg value="28b57b8ae4e60ef8841591ee82239eb2"/>
 	</bean>
 
 </beans>

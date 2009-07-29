@@ -12,6 +12,7 @@
 <div>
     <stripes:form beanclass="org.dataport.bussr.action.SearchActionBean">
         Que quieres consultar ... <stripes:text name="query" />
+        <stripes:submit name="search" />
     </stripes:form>
 </div>
 </body>
