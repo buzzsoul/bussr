@@ -19,10 +19,19 @@
             <c:forEach items="${actionBean.results}" var="current">
                 <li>
                     <h3>${current.title}</h3>
+                    <c:choose>
+                        <c:when test="${current.provider == 'GOOGLE'}">
+                            <img src="http://www.google.es/intl/en_com/images/logo_plain.png" alt="google.com"/>
+                        </c:when>
+                        <c:when test="${current.provider == 'ONCEOCHOSETENTA'}">
+                            <img src="http://11870.com/static/imgs/11870.png" alt="11870.com"/>
+                        </c:when>
+                        <c:when test="${current.provider == 'TWITTER'}">
+                            <img src="http://assets1.twitter.com/images/logo.png" alt="twitter"/>
+                        </c:when>
+                    </c:choose>
                     <span><a href="${current.link}">Quiero ver que se dice...</a></span>
                     <br/>
-                    <sub>Encontrado en ${current.provider} (aca dependiendo del valor de la enum, mostramos el icono del sitio donde se encontro)</sub>
-                    <span>${current.rating}</span>
                 </li>
             </c:forEach>
             </ul>

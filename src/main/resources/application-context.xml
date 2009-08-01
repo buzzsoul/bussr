@@ -24,12 +24,25 @@
 
 	<bean id="logEntryDao" class="org.dataport.bussr.data.impl.JdbcLogEntryDao">
 		<constructor-arg ref="dataSource" />
+		<constructor-arg value="org.dataport.bussr.model.mapper.LogEntryMapper" />
 	</bean>
 	
-	<bean id="onceOchoSetentaService" class="org.dataport.bussr.service.search.provider.OncheOchoSetentaSearchService">
+	<bean id="searchTermDao" class="org.dataport.bussr.data.impl.JdbcSearchTermDao">
+        <constructor-arg ref="dataSource" />
+        <constructor-arg value="org.dataport.bussr.model.mapper.SearchTermMapper" />
+    </bean>
+
+    <!-- search providers -->	
+	<bean id="onceOchoSetentaSearchProvider" class="org.dataport.bussr.service.search.provider.OncheOchoSetentaSearchProvider">
 	   <constructor-arg value="http://11870.com/api/v1/search"/>
 	   <constructor-arg value="3a799df328439d30e57b85495e67ae34"/>
 	   <constructor-arg value="28b57b8ae4e60ef8841591ee82239eb2"/>
 	</bean>
+	
+	<bean id="googleSearchProvider" class="org.dataport.bussr.service.search.provider.GoogleSearchProvider">
+       <constructor-arg value="http://ajax.googleapis.com/ajax/services/search/web?v=1.0"/>
+    </bean>
+    
+    <bean id="twitterSearchProvider" class="org.dataport.bussr.service.search.provider.TwitterSearchProvider" />
 
 </beans>

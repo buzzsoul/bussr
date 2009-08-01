@@ -1,6 +1,8 @@
 package org.dataport.bussr.service.search;
 
-public enum SearchProvider {
+import java.util.List;
 
-    ONCEOCHOSETENTA;
+public interface SearchProvider {
+
+    List<SearchResult> search(String q); 
 }

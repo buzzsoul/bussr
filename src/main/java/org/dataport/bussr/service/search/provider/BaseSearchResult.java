@@ -1,6 +1,6 @@
 package org.dataport.bussr.service.search.provider;
 
-import org.dataport.bussr.service.search.SearchProvider;
+import org.dataport.bussr.service.search.Provider;
 import org.dataport.bussr.service.search.SearchResult;
 
 public class BaseSearchResult implements SearchResult {
@@ -9,7 +9,7 @@ public class BaseSearchResult implements SearchResult {
     private String rating;
     private String text;
     private String link;
-    private SearchProvider provider;
+    private Provider provider;
 
     public String getTitle() {
         return title;
@@ -43,11 +43,11 @@ public class BaseSearchResult implements SearchResult {
         this.link = link;
     }
 
-    public SearchProvider getProvider() {
+    public Provider getProvider() {
         return provider;
     }
 
-    public void setProvider(SearchProvider provider) {
+    public void setProvider(Provider provider) {
         this.provider = provider;
     }
 

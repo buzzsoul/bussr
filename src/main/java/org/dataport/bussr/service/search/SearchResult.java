@@ -11,5 +11,5 @@ public interface SearchResult {
     String getText();
     String getRating();
     String getLink();
-    SearchProvider getProvider();
+    Provider getProvider();
 }

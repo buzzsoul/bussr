@@ -6,20 +6,28 @@ import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
-import net.sourceforge.stripes.validation.Validate;
 
 import org.dataport.bussr.action.foundation.BaseActionBean;
+import org.dataport.bussr.data.SearchTermDao;
+import org.dataport.bussr.model.SearchTerm;
+import org.dataport.bussr.service.search.SearchProvider;
 import org.dataport.bussr.service.search.SearchResult;
-import org.dataport.bussr.service.search.SearchService;
 
 @UrlBinding("/search")
 public class SearchActionBean extends BaseActionBean {
 
-    @SpringBean("onceOchoSetentaService")
-    private SearchService onceOchoSetentaService;
+    @SpringBean("onceOchoSetentaSearchProvider")
+    private SearchProvider onceOchoSetentaSearchProvider;
 
-    // input parameters, it's necessary to disable the encrypted property, otherwise a strange log we have in jetty
-    @Validate(encrypted = false)
+    @SpringBean("googleSearchProvider")
+    private SearchProvider googleSearchProvider;
+
+    @SpringBean("twitterSearchProvider")
+    private SearchProvider twitterSearchProvider;
+
+    @SpringBean("searchTermDao")
+    private SearchTermDao searchTermDao;
+
     private String query;
 
     // output parameters
@@ -27,7 +35,21 @@ public class SearchActionBean extends BaseActionBean {
 
     public Resolution search() {
         if (query != null) {
-            results = onceOchoSetentaService.search(query);
+            SearchTerm searchTerm = searchTermDao.loadByTerm(query);
+            if (searchTerm == null) {
+                searchTerm = new SearchTerm();
+                searchTerm.setTotal(1);
+                searchTerm.setTerm(query.trim());
+                searchTermDao.save(searchTerm);
+            } else {
+                searchTerm.setTotal(searchTerm.getTotal() + 1);
+                searchTermDao.update(searchTerm);
+            }
+
+            // by default, we search in all the engines (for the moment)
+            results = onceOchoSetentaSearchProvider.search(query);
+            results.addAll(googleSearchProvider.search(query));
+            results.addAll(twitterSearchProvider.search(query));
         }
         return new ForwardResolution("/WEB-INF/pages/results.jsp");
     }
