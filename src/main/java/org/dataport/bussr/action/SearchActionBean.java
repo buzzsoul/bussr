@@ -50,8 +50,10 @@ public class SearchActionBean extends BaseActionBean {
             results = onceOchoSetentaSearchProvider.search(query);
             results.addAll(googleSearchProvider.search(query));
             results.addAll(twitterSearchProvider.search(query));
+            return new ForwardResolution("/WEB-INF/pages/results.jsp");
+        } else {
+            return new ForwardResolution("/WEB-INF/pages/index.jsp");
         }
-        return new ForwardResolution("/WEB-INF/pages/results.jsp");
     }
 
     public void setQuery(String query) {
