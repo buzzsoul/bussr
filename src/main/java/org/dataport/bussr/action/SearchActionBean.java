@@ -34,6 +34,7 @@ public class SearchActionBean extends BaseActionBean {
     private List<SearchResult> results;
 
     public Resolution search() {
+        // we only show results page if the  user entered a text
         if (query != null) {
             SearchTerm searchTerm = searchTermDao.loadByTerm(query);
             if (searchTerm == null) {
@@ -52,6 +53,7 @@ public class SearchActionBean extends BaseActionBean {
             results.addAll(twitterSearchProvider.search(query));
             return new ForwardResolution("/WEB-INF/pages/results.jsp");
         } else {
+            // otherwise, we keep the index page
             return new ForwardResolution("/WEB-INF/pages/index.jsp");
         }
     }
