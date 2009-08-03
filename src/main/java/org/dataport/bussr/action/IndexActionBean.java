@@ -1,16 +1,36 @@
 package org.dataport.bussr.action;
 
+import java.util.List;
+
+import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.integration.spring.SpringBean;
 
 import org.dataport.bussr.action.foundation.BaseActionBean;
+import org.dataport.bussr.data.SearchTermDao;
+import org.dataport.bussr.model.SearchTerm;
 
-@UrlBinding("/")
+@UrlBinding("/index")
 public class IndexActionBean extends BaseActionBean {
 
+    private int CLOUD_TAGS_MAX_ITEMS = 50;
+
+    private List<SearchTerm> searchTerms;
+
+    @SpringBean("searchTermDao")
+    private SearchTermDao searchTermDao;
+
+    @DefaultHandler
     public Resolution load() {
         logEntry();
+        searchTerms = searchTermDao.loadPopularSearchTerms(CLOUD_TAGS_MAX_ITEMS);
         return new ForwardResolution("/WEB-INF/pages/index.jsp");
     }
+
+    public List<SearchTerm> getSearchTerms() {
+        return searchTerms;
+    }
+    
 }

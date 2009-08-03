@@ -8,7 +8,7 @@
 
 	<!-- the usual welcome file list -->
 	<welcome-file-list>
-		<welcome-file>/</welcome-file>
+		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
 
 	<context-param>
@@ -39,38 +39,38 @@
 			<param-value>messages</param-value>
 		</init-param>
 
-        <!-- for injecting spring beans -->
+		<!-- for injecting spring beans -->
 		<init-param>
 			<param-name>Interceptor.Classes</param-name>
 			<param-value>
 				net.sourceforge.stripes.integration.spring.SpringInterceptor
-    </param-value>
+			</param-value>
 		</init-param>
 	</filter>
 
-	<filter-mapping>
-		<filter-name>StripesFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-	</filter-mapping>
+	<filter>
+		<description>Dynamically maps URLs to ActionBeans.</description>
+		<display-name>Stripes Dynamic Mapping Filter</display-name>
+		<filter-name>DynamicMappingFilter</filter-name>
+		<filter-class>
+			net.sourceforge.stripes.controller.DynamicMappingFilter
+		</filter-class>
+		<!-- for injecting spring beans -->
+		<init-param>
+			<param-name>Interceptor.Classes</param-name>
+			<param-value>
+				net.sourceforge.stripes.integration.spring.SpringInterceptor
+			</param-value>
+		</init-param>
+
+	</filter>
 
 	<filter-mapping>
-		<filter-name>StripesFilter</filter-name>
-		<servlet-name>StripesDispatcher</servlet-name>
+		<filter-name>DynamicMappingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
-
-	<servlet>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<servlet-class>net.sourceforge.stripes.controller.DispatcherServlet
-		</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<!-- without extensions -->
-	<servlet-mapping>
-		<servlet-name>StripesDispatcher</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
 
 </web-app>

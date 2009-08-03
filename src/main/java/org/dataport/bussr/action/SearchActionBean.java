@@ -34,6 +34,7 @@ public class SearchActionBean extends BaseActionBean {
     private List<SearchResult> results;
 
     public Resolution search() {
+        logEntry();
         // we only show results page if the  user entered a text
         if (query != null) {
             SearchTerm searchTerm = searchTermDao.loadByTerm(query);

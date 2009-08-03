@@ -28,4 +28,10 @@ public class JdbcSearchTermDao extends GenericDao<SearchTerm, ExtendedParameteri
         }
     }
 
+    public List<SearchTerm> loadPopularSearchTerms(int maxResults) {
+        StringBuilder query = new StringBuilder("select ").append(mapper.getFieldListAsString()).append(" from ").append(
+                mapper.getTableName()).append(" order by total desc limit ?");
+        return jdbcTemplate.query(query.toString(), mapper, maxResults);
+    }
+
 }
