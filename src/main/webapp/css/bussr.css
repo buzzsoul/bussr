@@ -122,22 +122,29 @@ body {
 	-moz-border-radius-bottomright: 10px;
 	background: #cc0f0e;
 	overflow: hidden;
-	padding: 20px 25px;
+	padding: 0;
 	position: relative;
 	color: #fff;
 }
+#trends-tags h2 { 
+  background: #ff7733;
+  font-size:1.3em;
+  margin:0;
+  padding:.5em;
+  text-align:center;
+}
 
 /* cloudtags */
-#cloud { padding: 2px; line-height: 3em; text-align: center; margin: 0;}
-#cloud li { display: inline; }
-#cloud a { padding: 0px; text-decoration: none;}
-#cloud a.tag0 { font-size: 1.5em; font-weight: 100; }
-#cloud a.tag1 { font-size: 1.6em; font-weight: 200; }
-#cloud a.tag2 { font-size: 1.7em; font-weight: 300; }
-#cloud a.tag3 { font-size: 1.8em; font-weight: 400; }
-#cloud a.tag4 { font-size: 2.0em; font-weight: 500; }
-#cloud a.tag5 { font-size: 2.2em; font-weight: 600; }
-#cloud a.tag6 { font-size: 2.4em; font-weight: 700; }
-#cloud a.tag7 { font-size: 2.6em; font-weight: 800; }
-#cloud a.tag8 { font-size: 2.8em; font-weight: 900; }
-#cloud a.tag9 { font-size: 3.0em; font-weight: 900; }
+#trends-tags ul { padding: 1em; line-height: 3em; margin: 0;}
+#trends-tags ul li { display: inline; margin:0 .7em 0 .7em;}
+#trends-tags a { padding: 0px; text-decoration: none; color:#fff;}
+a.tag0 { font-size: 1.5em; font-weight: 100; }
+a.tag1 { font-size: 1.6em; font-weight: 200; }
+a.tag2 { font-size: 1.7em; font-weight: 300; }
+a.tag3 { font-size: 1.8em; font-weight: 400; }
+a.tag4 { font-size: 2.0em; font-weight: 500; }
+a.tag5 { font-size: 2.2em; font-weight: 600; }
+a.tag6 { font-size: 2.4em; font-weight: 700; }
+a.tag7 { font-size: 2.6em; font-weight: 800; }
+a.tag8 { font-size: 2.8em; font-weight: 900; }
+a.tag9 { font-size: 3.0em; font-weight: 900; }
