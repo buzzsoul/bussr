@@ -20,7 +20,7 @@
   <div id="header">                                                                                                      
        <div id="header2">                                                                                                    
          <h1 id="slogan">Discover what's telling about you on the net</h1>                                            
-         <a class="logo" href="/bussr/">bussr</a>                                                                                      
+         <a class="logo" href="/">bussr</a>                                                                                      
          <stripes:form id="home-search" beanclass="org.dataport.bussr.action.SearchActionBean">      
            <div>                                                                                                                          
              <stripes:text id="home-search-q" tabindex="1" size="40" name="query" />                                                    

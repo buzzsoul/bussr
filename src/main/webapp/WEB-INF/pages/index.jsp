@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,7 +22,7 @@
     <div id="header">
     <div id="header2">
     <h1 id="slogan">Discover what's telling about you on the net</h1>
-    <a class="logo" href="/bussr/">bussr</a>
+    <a class="logo" href="/">bussr</a>
     <stripes:form id="home-search" beanclass="org.dataport.bussr.action.SearchActionBean">
         <div>
 	        <stripes:text id="home-search-q" tabindex="1" size="40" name="query" />
@@ -34,10 +35,16 @@
      <div id="trends-tags">
        <p>popular tags</p>
        <c:if test="${not empty actionBean.searchTerms}">
-            <ul>
+            <ul id="cloud">  
 	            <c:forEach items="${actionBean.searchTerms}" var="current">
-	               <li>${current.term}</li>
-	               <%-- use count field for setting the size of the font --%>
+                   <li>
+                        <stripes:link beanclass="org.dataport.bussr.action.SearchActionBean" 
+                            class="tag${fn:substring((current.total * 10 / actionBean.totalSearchTermHits), 0, 1)}">
+	                       <stripes:param name="query" value="${current.term}"/>
+	                       ${current.term}
+                        </stripes:link>
+	               </li>
+	               
 	            </c:forEach>
             </ul>
         </c:if>

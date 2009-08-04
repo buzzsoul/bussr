@@ -48,6 +48,9 @@
 		</init-param>
 	</filter>
 
+	<!--
+		see http://stripes.sourceforge.net/docs/current/javadoc/net/sourceforge/stripes/controller/DynamicMappingFilter.html
+	-->
 	<filter>
 		<description>Dynamically maps URLs to ActionBeans.</description>
 		<display-name>Stripes Dynamic Mapping Filter</display-name>
