@@ -1,0 +1,21 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
+
+	<http>
+		<!-- <intercept-url pattern="/**" access="ROLE_USER" />  -->
+		<openid-login login-page="/login" login-processing-url="/do_login" 
+            default-target-url="/" always-use-default-target="true"/>
+		<logout invalidate-session="true" logout-success-url="/" logout-url="/logout"/>
+	</http>
+
+    <!-- mock for test -->
+	<authentication-provider>
+		<user-service>
+			  <user name="http://openid-provider.appspot.com/matiascas" password="notused" authorities="ROLE_USER"  />
+		</user-service>
+	</authentication-provider>
+
+
+</beans:beans>

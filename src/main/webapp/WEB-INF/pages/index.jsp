@@ -3,6 +3,7 @@
 <%@ taglib prefix="stripes" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%@ taglib prefix='security' uri='http://www.springframework.org/security/tags' %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
@@ -12,9 +13,21 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bussr.css" type="text/css" media="screen" />
 </head>
 <body>
+
 <div id="container">
     <div id="topnav">
-     	  <p>bussr account</p>
+        <security:authentication property="principal" scope="page" var="userPrincipal"/>
+        <c:choose>
+            <c:when test="${not empty userPrincipal}">
+                welcome ${userPrincipal} | <stripes:link href="/logout">logout</stripes:link>
+            </c:when>
+            <c:otherwise>
+                <p><stripes:link beanclass="org.dataport.bussr.action.LoginActionBean">bussr account</stripes:link></p>
+            </c:otherwise>
+        </c:choose>     	  
+        <c:if test="${not empty userPrincipal}">                
+            
+        </c:if>
     </div>
 
     <div id="header">
