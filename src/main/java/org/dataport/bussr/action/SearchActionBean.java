@@ -37,11 +37,12 @@ public class SearchActionBean extends BaseActionBean {
         logEntry();
         // we only show results page if the  user entered a text
         if (query != null) {
-            SearchTerm searchTerm = searchTermDao.loadByTerm(query);
+            String queryToUse = query.toLowerCase().trim();
+            SearchTerm searchTerm = searchTermDao.loadByTerm(queryToUse);
             if (searchTerm == null) {
                 searchTerm = new SearchTerm();
                 searchTerm.setTotal(1);
-                searchTerm.setTerm(query.trim());
+                searchTerm.setTerm(queryToUse);
                 searchTermDao.save(searchTerm);
             } else {
                 searchTerm.setTotal(searchTerm.getTotal() + 1);
