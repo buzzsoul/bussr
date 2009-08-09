@@ -21,6 +21,23 @@
 			</resource>
 		</resources>
 		<plugins>
+		
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1-beta-1</version>
@@ -36,21 +53,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!-- Compress every js and css files except already compressed files like *-min.js files and compressed.css -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
+				<groupId>net.sf.alchim</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compress</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<encoding>UTF-8</encoding>
+					<excludes>
+						<exclude>**/*-min.js</exclude>
+						<exclude>**/compressed.css</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
@@ -64,9 +86,11 @@
 		</plugins>
 	</build>
 
-	<!-- profiles for configuration and build, by default it activates local-->
+	<!--
+		profiles for configuration and build, by default it activates local
+	-->
 	<profiles>
-	   
+
 		<profile>
 			<id>local</id>
 			<activation>
