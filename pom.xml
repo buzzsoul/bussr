@@ -8,9 +8,42 @@
 	<name>bussr</name>
 	<url>http://www.bussr.com</url>
 
+	<!--  build configuration -->
 	<build>
 		<finalName>bussr</finalName>
+		<filters>
+			<filter>src/main/filters/configuration-${env}.properties</filter>
+		</filters>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1-beta-1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>war</goal>
+						</goals>
+						<configuration>
+							<classifier>${env}</classifier>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -31,6 +64,27 @@
 		</plugins>
 	</build>
 
+	<!-- profiles for configuration and build, by default it activates local-->
+	<profiles>
+	   
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>local</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env>prod</env>
+			</properties>
+		</profile>
+	</profiles>
+
+	<!-- dependencies repositories -->
 	<repositories>
 		<!-- user by rome -->
 		<repository>
@@ -48,6 +102,7 @@
 		</repository>
 	</repositories>
 
+	<!-- dependencies -->
 	<dependencies>
 		<!-- openId authentication -->
 		<dependency>

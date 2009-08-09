@@ -9,13 +9,11 @@
                     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
                     http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.0.xsd">
 
-    <!-- FIXME in the future split this file ?? -->
-    <!-- TODO use configuration properties and maven filters for extracting configuration values to an external file -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="url" value="jdbc:mysql://localhost/bussr" />
-		<property name="username" value="bussr" />
-		<property name="password" value="bussr" />
+		<property name="url" value="jdbc:mysql://${db.host}/${db.schema}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="maxActive" value="20" />
 		<property name="minIdle" value="0" />
@@ -26,23 +24,27 @@
 		<constructor-arg ref="dataSource" />
 		<constructor-arg value="org.dataport.bussr.model.mapper.LogEntryMapper" />
 	</bean>
-	
-	<bean id="searchTermDao" class="org.dataport.bussr.data.impl.JdbcSearchTermDao">
-        <constructor-arg ref="dataSource" />
-        <constructor-arg value="org.dataport.bussr.model.mapper.SearchTermMapper" />
-    </bean>
 
-    <!-- search providers -->	
-	<bean id="onceOchoSetentaSearchProvider" class="org.dataport.bussr.service.search.provider.OncheOchoSetentaSearchProvider">
-	   <constructor-arg value="http://11870.com/api/v1/search"/>
-	   <constructor-arg value="3a799df328439d30e57b85495e67ae34"/>
-	   <constructor-arg value="28b57b8ae4e60ef8841591ee82239eb2"/>
+	<bean id="searchTermDao" class="org.dataport.bussr.data.impl.JdbcSearchTermDao">
+		<constructor-arg ref="dataSource" />
+		<constructor-arg value="org.dataport.bussr.model.mapper.SearchTermMapper" />
 	</bean>
-	
-	<bean id="googleSearchProvider" class="org.dataport.bussr.service.search.provider.GoogleSearchProvider">
-       <constructor-arg value="http://ajax.googleapis.com/ajax/services/search/web?v=1.0"/>
-    </bean>
-    
-    <bean id="twitterSearchProvider" class="org.dataport.bussr.service.search.provider.TwitterSearchProvider" />
+
+	<!-- search providers -->
+	<bean id="onceOchoSetentaSearchProvider"
+		class="org.dataport.bussr.service.search.provider.OncheOchoSetentaSearchProvider">
+		<constructor-arg value="${search.provider.onceOchoSetenta.endpoint}" />
+		<constructor-arg value="${search.provider.onceOchoSetenta.applicationToken}" />
+		<constructor-arg
+			value="${search.provider.onceOchoSetenta.authenticationSign}" />
+	</bean>
+
+	<bean id="googleSearchProvider"
+		class="org.dataport.bussr.service.search.provider.GoogleSearchProvider">
+		<constructor-arg value="${search.provider.google.endpoint}" />
+	</bean>
+
+	<bean id="twitterSearchProvider"
+		class="org.dataport.bussr.service.search.provider.TwitterSearchProvider" />
 
 </beans>
