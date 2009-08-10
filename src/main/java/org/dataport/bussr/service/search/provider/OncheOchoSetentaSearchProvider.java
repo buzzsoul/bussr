@@ -54,6 +54,7 @@ public class OncheOchoSetentaSearchProvider implements SearchProvider {
     private SearchResult processEntry(SyndEntry entry) {
         BaseSearchResult ret = new BaseSearchResult();
         ret.setProvider(Provider.ONCEOCHOSETENTA);
+        ret.setText(entry.getDescription().getValue());
         ret.setTitle(entry.getTitle());
         ret.setLink(entry.getLink());
         return ret;

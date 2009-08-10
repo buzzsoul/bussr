@@ -27,8 +27,9 @@ public class TwitterSearchProvider implements SearchProvider {
 
     private SearchResult processResult(Result currentResult) {
         BaseSearchResult ret = new BaseSearchResult();
+        ret.setTitle(currentResult.getFromUser());
         ret.setProvider(Provider.TWITTER);
-        ret.setTitle(currentResult.getText());
+        ret.setText(currentResult.getText());
         if (currentResult.hasFromUser()) {
             // TODO define URL to show
             ret.setLink(TWITTER_BASE_URL + currentResult.getFromUser()); 

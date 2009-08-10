@@ -61,6 +61,7 @@ public class GoogleSearchProvider implements SearchProvider {
         BaseSearchResult ret = new BaseSearchResult();
         ret.setTitle(currentResult.getString("titleNoFormatting"));
         ret.setLink(currentResult.getString("unescapedUrl"));
+        ret.setText(currentResult.getString("content"));
         ret.setProvider(Provider.GOOGLE);
         return ret;
     }

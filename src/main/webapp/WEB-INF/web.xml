@@ -6,7 +6,7 @@
 
 	<display-name>bussr</display-name>
 
-	<!-- the usual welcome file list -->
+	<!-- entering to Stripes flow -->
 	<welcome-file-list>
 		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
@@ -16,35 +16,29 @@
 		<param-value>classpath:application-context.xml, classpath:application-context-security.xml</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>StripesResources</param-value>
+	</context-param>
+
 	<listener>
-		<listener-class>
-			org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
 	<filter>
 		<display-name>Stripes Filter</display-name>
 		<filter-name>StripesFilter</filter-name>
-		<filter-class>net.sourceforge.stripes.controller.StripesFilter
-		</filter-class>
-		<!-- actions autodiscover -->
+		<filter-class>net.sourceforge.stripes.controller.StripesFilter</filter-class>
+		<!-- action autodiscover -->
 		<init-param>
 			<param-name>ActionResolver.Packages</param-name>
 			<param-value>org.dataport.bussr.action</param-value>
 		</init-param>
 
-		<!-- resource bundles for literals -->
-		<init-param>
-			<param-name>ResourceBundles.BaseNames</param-name>
-			<param-value>messages</param-value>
-		</init-param>
-
 		<!-- for injecting spring beans -->
 		<init-param>
 			<param-name>Interceptor.Classes</param-name>
-			<param-value>
-				net.sourceforge.stripes.integration.spring.SpringInterceptor
-			</param-value>
+			<param-value>net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
 		</init-param>
 	</filter>
 
@@ -56,22 +50,17 @@
 		<description>Dynamically maps URLs to ActionBeans.</description>
 		<display-name>Stripes Dynamic Mapping Filter</display-name>
 		<filter-name>DynamicMappingFilter</filter-name>
-		<filter-class>
-			net.sourceforge.stripes.controller.DynamicMappingFilter
-		</filter-class>
+		<filter-class>net.sourceforge.stripes.controller.DynamicMappingFilter</filter-class>
 		<!-- for injecting spring beans -->
 		<init-param>
 			<param-name>Interceptor.Classes</param-name>
-			<param-value>
-				net.sourceforge.stripes.integration.spring.SpringInterceptor
-			</param-value>
+			<param-value>net.sourceforge.stripes.integration.spring.SpringInterceptor</param-value>
 		</init-param>
 	</filter>
 
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -81,11 +70,10 @@
 			<param-value>true</param-value>
 		</init-param>
 	</filter>
-	
+
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
-		</filter-class>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 
 	<filter-mapping>
