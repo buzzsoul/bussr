@@ -68,7 +68,7 @@
 				<configuration>
 					<excludes>
 						<exclude>**/*-min.js</exclude>
-						<exclude>**/compressed.css</exclude>
+						<exclude>**/*compressed.css</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -100,6 +100,7 @@
 				<env>local</env>
 			</properties>
 		</profile>
+		
 		<profile>
 			<id>prod</id>
 			<properties>
